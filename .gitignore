@@ -5,11 +5,13 @@ __pycache__/
 
 /annotations/
 /images/
-/data/
+/data/train/
+/data/fullData/
+/data/valid/
 /runs/
 yolov8x.pt
 yolo11n.pt
-custom.yaml
+
 # C extensions
 *.so
 
