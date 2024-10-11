@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+/annotations/
+/images/
+/data/
+/runs/
+yolov8x.pt
+yolo11n.pt
+custom.yaml
 # C extensions
 *.so
 
