@@ -1,0 +1,5 @@
+trainCounter,metrics/mAP50(B),metrics/mAP50-95(B)
+Egitim 1,0.58335,0.38586
+Egitim 2,0.58429,0.35255
+Egitim 3,0.64056,0.42647
+Egitim 4,0.57624,0.37779
