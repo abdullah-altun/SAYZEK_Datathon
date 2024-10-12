@@ -5,9 +5,7 @@ __pycache__/
 
 /annotations/
 /images/
-/data/train/
-/data/fullData/
-/data/valid/
+/data/
 /runs/
 yolov8x.pt
 yolo11n.pt

@@ -1,5 +1,5 @@
-train: data/train/images
-val: data/valid/images
+train: /home/abdus/Masaüstü/GithubCalisma/SAYZEK_Datathon/data/bicubic/train/images
+val: /home/abdus/Masaüstü/GithubCalisma/SAYZEK_Datathon/data/bicubic/valid/images
 
 nc: 4
-names: ['bina',"YolKesisim","Silo","FutbolSahasi"]
+names: ['bina',"YolKesisim","FutbolSahasi","Silo"]
