@@ -1,5 +1,5 @@
-train: /home/abdus/Masaüstü/GithubCalisma/SAYZEK_Datathon/data/ESRGAN/train/images
-val: /home/abdus/Masaüstü/GithubCalisma/SAYZEK_Datathon/data/ESRGAN/valid/images
+train: SAYZEK_Datathon/data/bicubic/train/images
+val: SAYZEK_Datathon/data/bicubic/valid/images
 
 nc: 4
 names: ['bina',"YolKesisim","FutbolSahasi","Silo"]
