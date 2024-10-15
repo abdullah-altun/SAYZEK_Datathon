@@ -1,5 +1,5 @@
 import numpy as np
-
+import glob
 
 def yolo_label_to_coco(values, w, h):
     # YOLO formatını COCO formatına çevirme
@@ -18,3 +18,23 @@ def coco_label_to_yolo(xmin, ymin, xmax, ymax, w, h):
     y_center = (ymin + ymax) / (2 * h)  
     
     return x_center, y_center, width, height
+
+
+
+
+if __name__ == "__main__":
+    for path in glob.glob("data/FutbolSaha/**/labels/*"):
+        with open(path,"r") as f:
+            data = f.read()
+        f.close()
+
+        bboxText = ""
+        for bbox in data.split("\n"):
+            if len(bbox) > 0:
+                bboxText += "0 "
+                bboxText += " ".join(bbox.split(" ")[1:])
+                bboxText += "\n"
+                
+        with open(path,"w") as f:
+            f.write(bboxText)
+        f.close()

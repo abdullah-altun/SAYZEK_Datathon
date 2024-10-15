@@ -10,6 +10,7 @@ __pycache__/
 yolov8x.pt
 yolo11n.pt
 resultsChainging.py
+/models/
 # C extensions
 *.so
 
