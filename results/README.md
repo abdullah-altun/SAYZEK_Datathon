@@ -35,6 +35,7 @@
 <strong>Eğitim-12:</strong> mAP50: 0.995, mAP50-95: 0.869<br>
 
 <strong>Eğitim-13:</strong> mAP50: 0.39, mAP50-95: 0.13<br>
+<strong>Eğitim-14:</strong> mAP50: 0.41, mAP50-95: 0.13<br>
 </p>
 
 <p>

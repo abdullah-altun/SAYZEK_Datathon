@@ -4,14 +4,14 @@ import glob
 
 import utils as ut
 
-dataPath = glob.glob("data/DataCategori/train/images/**")
+dataPath = glob.glob("data/roadData/train/images/**")
 
 idx = 0
 colors = {"0":(0,0,0),"1":(255,0,0),"2":(0,255,0),"3":(0,0,255)}
 while True:
     img = cv2.imread(dataPath[idx])
     name = dataPath[idx].split("/")[-1][:-4]
-    labelPath = f"data/DataCategori/train/labels/{name}.txt"
+    labelPath = f"data/roadData/train/labels/{name}.txt"
     
     with open(labelPath,"r") as f:
         data = f.read()

@@ -23,7 +23,7 @@ def coco_label_to_yolo(xmin, ymin, xmax, ymax, w, h):
 
 
 if __name__ == "__main__":
-    for path in glob.glob("data/FutbolSaha/**/labels/*"):
+    for path in glob.glob("data/roadData/**/labels/*"):
         with open(path,"r") as f:
             data = f.read()
         f.close()
