@@ -9,7 +9,7 @@ from ultralytics import YOLO
 import json
 from pycocotools.coco import COCO
 
-annotation_file_path = 'data/CocoFormat/valid.json'
+annotation_file_path = 'annotations/train.json'
 
 coco_ann = COCO(annotation_file=annotation_file_path)
 imgfile2imgid = {coco_ann.imgs[i]['file_name']: i for i in coco_ann.imgs.keys()}
@@ -20,6 +20,7 @@ with open('image_file_name_to_image_id.json', 'w') as f:
 
 image_file_name_to_image_id = json.load(open('image_file_name_to_image_id.json'))
 results = []
+
 
 
 colors = {"build":(0,0,0),"silo":(0,0,255),"road":(0,255,0),"futbol":(255,0,0)}
@@ -36,6 +37,7 @@ def process_detection(model,modelName,frame,img_id):
     results = model(frame)
 
     frameAlt = frame.copy()
+    con = frame.shape[0]
     frameAlt = cv2.resize(frameAlt,(512,512))
     for result in results:
         boxes = result.boxes.cpu().numpy()
@@ -47,14 +49,16 @@ def process_detection(model,modelName,frame,img_id):
 
             x1,y1,x2,y2 = r
             cv2.rectangle(frame,(x1,y1),(x2,y2),color,1)
-            x1 = int(x1/2)
-            x2 = int(x2/2)
-            y1 = int(y1/2)
-            y2 = int(y2/2)
+
+            if con == 1024:
+                x1 = int(x1/2)
+                x2 = int(x2/2)
+                y1 = int(y1/2)
+                y2 = int(y2/2)
 
             width = x2-x1
             height = y2-y1
-            bbox = np.array([x1,x2,width,height])
+            bbox = np.array([x1,y1,width,height])
             label = categors[modelName]
             res = {
 
@@ -72,8 +76,7 @@ def process_detection(model,modelName,frame,img_id):
 
 imageIdx = 1
 resultsJson = []
-for path in glob.glob("data/CocoFormat/valid/**"):
-
+for path in glob.glob("images/**"):
     name = path.split("/")[-1][:-4]
     img = cv2.imread(path)
     width = int(img.shape[1] * 2)

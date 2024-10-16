@@ -1,5 +1,5 @@
-train: /home/abdus/Masaüstü/GithubCalisma/SAYZEK_Datathon/data/roadData/train/images
-val: /home/abdus/Masaüstü/GithubCalisma/SAYZEK_Datathon/data/roadData/valid/images
+train: /home/abdus/Masaüstü/GithubCalisma/SAYZEK_Datathon/data/roadDataV2/train/images
+val: /home/abdus/Masaüstü/GithubCalisma/SAYZEK_Datathon/data/roadDataV2/valid/images
 
 nc: 1
 names: ["bina"]

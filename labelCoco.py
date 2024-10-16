@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 
 
 trainData,validData = train_test_split(glob.glob("data/satim-bicubic/train/labels/**"),test_size=0.33,random_state=42)
-
+validData = glob.glob("data/normal/valid/labels/**")
 trainlabelJson = {
     "info":
     {
@@ -127,14 +127,14 @@ def jsonRead(labelJson,labelData,folderName):
     global imageIdx,labelIdx
     for path in labelData:
         name = path.split("/")[-1][:-4]
-        imagePath = f"data/satim-bicubic/train/images/{name}.jpg"
-        imageToPath = f"data/CocoFormat/{folderName}/{name}.jpg"
+        imagePath = f"data/normal/valid/images/{name}.png"
+        imageToPath = f"data/CocoFormat/{folderName}/{name}.png"
         shutil.copy(imagePath,imageToPath)
         imagesDict = {
             "id": imageIdx,
             "width": 1024,
             "height": 1024,
-            "file_name": f"{name}.jpg",
+            "file_name": f"{name}.png",
             "license": 0,
             "flickr_url": "",
             "coco_url": "",
@@ -148,32 +148,33 @@ def jsonRead(labelJson,labelData,folderName):
         labelList = []
         for label in labelData.split("\n"):
             category = label.split(" ")[0]
-            xmin, ymin, xmax, ymax = ut.yolo_label_to_coco(label.split(" ")[1:],w,h)
-            labelDict = {
-                "id": labelIdx,
-                "image_id": imageIdx,
-                "category_id": int(category)+1,
-                "segmentation": [],
-                "area":(xmax-xmin)*(ymax-ymin),
-                "bbox": [
-                    xmin,
-                    ymin,
-                    (xmax-xmin),
-                    (ymax-ymin)
-                ],
-                "iscrowd":0,
-                "attributes": {
-                    "occluded": False,
-                    "rotation": 0.0
+            if len(label)>0:
+                xmin, ymin, xmax, ymax = ut.yolo_label_to_coco(label.split(" ")[1:],w,h)
+                labelDict = {
+                    "id": labelIdx,
+                    "image_id": imageIdx,
+                    "category_id": int(category)+1,
+                    "segmentation": [],
+                    "area":(xmax-xmin)*(ymax-ymin),
+                    "bbox": [
+                        xmin,
+                        ymin,
+                        (xmax-xmin),
+                        (ymax-ymin)
+                    ],
+                    "iscrowd":0,
+                    "attributes": {
+                        "occluded": False,
+                        "rotation": 0.0
+                    }
                 }
-            }
-            labelJson["annotations"].append(labelDict)
-            labelIdx += 1
-        imageIdx += 1
+                labelJson["annotations"].append(labelDict)
+                labelIdx += 1
+            imageIdx += 1
     jsonPath = f"data/CocoFormat/{folderName}.json"
     with open(jsonPath,"w") as f:
         json.dump(labelJson,f)
     f.close()
 
-jsonRead(trainlabelJson,trainData,"train")
+# jsonRead(trainlabelJson,trainData,"train")
 jsonRead(validlabelJson,validData,"valid")
